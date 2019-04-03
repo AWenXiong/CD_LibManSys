@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.library.dao.reserveBookdao">
+    <insert id="addReserveBook" parameterType="org.library.entity.reserveBook">
+        insert ignore into reserveBook
+        values (#{readerId},#{bookId},#{createTime},#{state});
+    </insert>
+
+    <delete id="deleteReserveBook" parameterType="org.library.entity.reserveBook">
+        delete from reserveBook
+        where reader_id = #{readerId}
+        and book_id = #{bookId}
+        and create_time = #{createTime};
+    </delete>
+
+    <select id="query" resultType="org.library.entity.reserveBook">
+        select * from reserveBook;
+    </select>
+
+    <select id="query1" resultType="org.library.entity.reserveBook">
+        select * from reserveBook
+        where reader_Id = #{readerId};
+    </select>
+</mapper>

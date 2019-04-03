@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.library.dao.borrowBookdao">
+    <select id="getBorrowBook" resultType="org.library.entity.borrowBook">
+        select * from borrowBook
+        where book_id = #{bookId}
+        and reader_id = #{readerId}
+        and begin_time = #{beginTime};
+    </select>
+
+    <insert id="addborrow" parameterType="org.library.entity.borrowBook">
+        insert ignore into borrowBook
+        values(#{readerId},#{bookId},#{beginTime},#{endTime},#{state});
+    </insert>
+
+    <delete id="deleteborrow" parameterType="org.library.entity.borrowBook">
+        delete from borrowBook
+        where book_id = #{bookId}
+        and reader_id = #{readerId}
+        and begin_time = #{beginTime}
+        and end_time = #{endTime};
+    </delete>
+
+    <select id="queryborrow" resultType="org.library.entity.borrowBook">
+        select * from borrowBook
+        where reader_id = #{readerId};
+    </select>
+</mapper>

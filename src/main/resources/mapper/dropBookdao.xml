@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.library.dao.dropBookdao">
+    <insert id="addDrop" parameterType="org.library.entity.dropBook">
+        insert ignore into dropBook
+        values (#{readerId},#{bookId},#{createTime},#{state});
+    </insert>
+
+    <delete id="deleteDrop" parameterType="org.library.entity.dropBook">
+        delete from dropBook
+        where reader_id = #{readerId}
+        and book_id = #{bookId}
+        and create_time = #{createTime};
+    </delete>
+
+    <select id="queryDropBook" resultType="org.library.entity.dropBook">
+        select * from dropBook;
+    </select>
+</mapper>

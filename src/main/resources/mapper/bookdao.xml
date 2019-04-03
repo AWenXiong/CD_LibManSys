@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.library.dao.bookdao">
+
+    <select id="exist" resultType="int">
+        select count(*)
+        from book
+        where book_name = #{bookName}
+        and book_writer = #{bookWriter}
+        and book_press = #{bookPress}
+        and book_type = #{bookType}
+    </select>
+
+    <select id="exist1" resultType="int">
+        select count(*)
+        from book
+        where book_id = #{bookId};
+    </select>
+
+    <insert id="addBook">
+        insert ignore into book
+        values (#{bookId},#{bookName},#{bookWriter},#{bookPress},#{bookType},#{bookStock},#{bookTotal});
+    </insert>
+
+    <delete id="deleteBook">
+        delete from book
+        where book_id = #{bookId};
+    </delete>
+
+    <update id="update">
+        update book
+        set book_name = #{bookName},
+        book_writer = #{bookWriter},
+        book_press = #{bookPress},
+        book_type = #{bookType},
+        book_stock = #{bookStock},
+        book_total = #{bookTotal}
+        where book_id = #{bookId}
+    </update>
+
+    <select id="queryById" resultType="org.library.entity.book">
+        select *
+        from book
+        where book_id = #{bookId};
+    </select>
+    <select id="queryByName" resultType="org.library.entity.book">
+        select *
+        from book
+        where book_name like #{bookName};
+    </select>
+
+    <select id="queryByWriter" resultType="org.library.entity.book">
+        select *
+        from book
+        where book_writer like #{bookWriter};
+    </select>
+
+    <select id="queryByPress" resultType="org.library.entity.book">
+        select *
+        from book
+        where book_press like #{bookPress};
+    </select>
+
+    <select id="queryByType" resultType="org.library.entity.book">
+        select *
+        from book
+        where book_type like #{bookType};
+    </select>
+
+    <select id="getBookId" resultType="string">
+        select book_id
+        from book
+        where book_name = #{bookName} and book_writer = #{bookWriter}
+        and book_press = #{bookPress} and book_type = #{bookType};
+    </select>
+
+    <select id="getBook" resultType="org.library.entity.book">
+        select book_id,book_name,book_writer,book_press,book_type,book_stock,book_total
+        from book
+        where book_id = #{bookId};
+    </select>
+
+    <select id="getMaxId" resultType="string">
+        select max(book_id)
+        from book
+    </select>
+</mapper>

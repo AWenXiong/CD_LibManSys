@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.library.dao.userdao">
+    <insert id="addUser" parameterType="org.library.entity.user">
+        insert ignore into user
+        values (#{userId},#{userName},#{userPassWord},#{userType});
+    </insert>
+
+    <delete id="deleteUser">
+        delete from user
+        where user_id = #{userId};
+    </delete>
+
+    <update id="update" parameterType="org.library.entity.user">
+        update user
+        set
+        user_name = #{userName},
+        user_password = #{userPassWord},
+        user_type = #{userType}
+        where user_id = #{userId};
+    </update>
+
+    <select id="query" resultType="org.library.entity.user">
+        select * from user;
+    </select>
+
+    <select id="getUser" resultType="org.library.entity.user">
+        select * from user
+        where user_id = #{userId} and user_password = #{userPassWord};
+    </select>
+
+    <select id="exist" resultType="int">
+        select count(*)
+        from user
+        where user_id = #{userId}
+        and user_password = #{userPassWord};
+    </select>
+
+    <select id="getMaxId" resultType="string">
+        select max(user_id)
+        from user ;
+    </select>
+
+    <select id="queryUser" resultType="org.library.entity.user">
+        select *
+        from user
+        where user_id = #{userId};
+    </select>
+</mapper>
